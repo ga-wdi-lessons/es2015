@@ -4,7 +4,7 @@
 
 - Understand what ES2015 is and how to use it
 - Exposure to many of the most useful new features introduced in ES2015
-- Update an existing
+- Update an existing react app to use ES2015 features
 
 ### ES2015 Background
 
@@ -124,8 +124,6 @@ var name = "bob", age = 71;
 Notice how similar this looks to JSX? That's no coincidence! JSX leverages this with a little extra syntactic sugar to allow us to write code that looks more like html in our javascript. This is also why we need babel to use JSX.
 
 [MDN Docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals)
-
-### You do:
 
 # Let and Const
 
@@ -697,3 +695,5 @@ The Proxy object is used to define custom behavior for fundamental operations (e
 [MDN Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy)
 
 ### + probably some more
+
+[ES2015 features and compatibility](http://kangax.github.io/compat-table/es6/)
