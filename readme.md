@@ -200,6 +200,10 @@ Caveats
 
 ### You do:
 
+Replace var with let and const
+
+[Solution](https://github.com/ga-wdi-exercises/react-omdb/commit/6405abfa36d333781d42d7cf54c6cc285255897f)
+
 # Concise Object Methods / Object literals
 
 'Concise Object Methods' are a new syntax for writing functions with objects that allow you to skip writing ': function'
@@ -231,6 +235,10 @@ let doStuff = {
 ```
 
 ### You do:
+
+Convert all object methods to use new syntax by removing `: function`
+
+[Solution](https://github.com/ga-wdi-exercises/react-omdb/commit/e089b6f6a697c02ca2d1f3e5dd88e10ea2404b41)
 
 # Arrows
 
@@ -349,6 +357,10 @@ This trivial example shows a non trivial use case - arrows can simplify callback
 
 ### You do:
 
+Convert remaining functions to arrow syntax
+
+[Solution](https://github.com/ga-wdi-exercises/react-omdb/commit/fc83ca87348cc370182faaef7e6a92f32e4d799b)
+
 # Destructing
 
 Destructing is a new syntax that makes it easier to extract data from objects and arrays. Destructing matches patterns to assign values to variables.
@@ -441,6 +453,10 @@ sayHello()
 
 ### You do:
 
+Convert imports to ES2015 syntax
+
+[Solution](https://github.com/ga-wdi-exercises/react-omdb/commit/a6a59fbc06d05c4a2525c435f32528493a909e6b) (disregard the updates to .babelrc and package.json, you should have already done that)
+
 # Classes
 
 
@@ -511,6 +527,39 @@ class JumboSlice extends Pizza {
 ```
 
 ### You do:
+
+Update to use classes
+
+We will no longer be using `React.createClass` and are instead creating classes with the new syntax that extend `React.Component`.
+
+1. For the components that use
+  `const <ComponentName> = React.createClass({` and just contain `render() {`
+  update them to `class <ComponentName> extends React.Component{`.
+  This also involves removing the parenthesis that came from `createClass()`
+2. `React.createClass` automatically bound `this` to the methods to keep context when the methods are called we can use arrow functions:
+  - Update
+  ```js
+  onUpdateSearch={this.handleUpdateSearch}
+  onSubmitSearch={this.handleSubmitSearch}
+  ```
+  to:
+  ```js
+  onUpdateSearch={(event) => this.handleUpdateSearch(event)}
+  onSubmitSearch={(event) => this.handleSubmitSearch(event)}
+  ```
+3. Update the `SearchContainer` component to also use class syntax.
+  - Remove the commas between methods
+  - change `getInitialState()` to `constructor()`
+  - include `super()` to call the constructor of React.Component (the thing we're extending)
+  ```js
+  -  getInitialState() {
+  -    return {
+  +  constructor() {
+  +    super();
+  +    this.state = {
+  ```
+
+[Solution](https://github.com/ga-wdi-exercises/react-omdb/commit/0d736321d7d803d21e286c62f618633090facd93)
 
 #### Learn more:
 - class expressions vs class declarations
