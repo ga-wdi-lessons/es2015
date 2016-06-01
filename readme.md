@@ -10,37 +10,15 @@
 
 ES2015? ES2015 (sometimes called ES6, ESHarmony) is the new version of Javascript that was released in June 2015. It adds a ton of new syntax and functionality aimed at making writing complex applications easier
 
-Cool! Can I use it? The short answer is yes_ (cross your fingers).  _*After the lesson__ [check out this awesome table of features and where they are supported.](https://kangax.github.io/compat-table/es6/)
+
+### Where / How can I use its features?
+
+Cool! Can I use it? The short answer is yes! (cross your fingers).  
+[Check out this awesome table of features and where they are supported.](https://kangax.github.io/compat-table/es6/)
 
 **TL;DR:** Decent desktop support of Firefox, Edge (MS finally ditched IE and made something awesome), Chrome (with 'use strict'). Somethings work on Node, Safari is still 'meh' and there is limited ES6 support on mobile browsers.
 
 The current solution to improve compatibility is to transpile your ES6 code to ES5 using something like [Babel](https://babeljs.io/) or [Traceur](https://github.com/google/traceur-compiler). I use Babel because at the moment it has slightly better feature support and an awesome REPL.
-
-### What are it's features?
-- Template literals & Multi-line strings
-- Let and Const
-- Concise Object Methods / Object literals
-- Arrows
-- Destructing
-- Modules / Loaders
-- Classes
-
-Bonus
-- new static methods - String, Array, Math,
-- Symbols
-- Default Parameters
-- Spread
-- Rest parameters
-- Promises
-- Iterators
-- Map / Set / WeakMap / WeakSet
-- Generators
-- Proxies
-- + probably some more
-
-### Where / How can I use its features?
-
-`"use strict";`
 
 ### Set-up
 
