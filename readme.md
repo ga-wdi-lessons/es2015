@@ -1,9 +1,12 @@
 # ES6 / ES2015
 
-## Learning Objectives
+### Learning Objectives
 
+- Understand what ES2015 is and how to use it
+- Exposure to many of the most useful new features introduced in ES2015
+- Update an existing
 
-## ES2015 Background
+### ES2015 Background
 
 ES2015? ES2015 (sometimes called ES6, ESHarmony) is the new version of Javascript that was released in June 2015. It adds a ton of new syntax and functionality aimed at making writing complex applications easier
 
@@ -13,27 +16,26 @@ Cool! Can I use it? The short answer is yes_ (cross your fingers).  _*After the 
 
 The current solution to improve compatibility is to transpile your ES6 code to ES5 using something like [Babel](https://babeljs.io/) or [Traceur](https://github.com/google/traceur-compiler). I use Babel because at the moment it has slightly better feature support and an awesome REPL.
 
-
 ### What are it's features?
 - Template literals & Multi-line strings
 - Let and Const
+- Concise Object Methods / Object literals
 - Arrows
-- Object literals
-- Classes
-- Modules / Loaders
-- Default Parameters
 - Destructing
+- Modules / Loaders
+- Classes
 
 Bonus
 - new static methods - String, Array, Math,
+- Symbols
+- Default Parameters
+- Spread
+- Rest parameters
 - Promises
 - Iterators
-- Generators
-- Spread / Rest parameters
 - Map / Set / WeakMap / WeakSet
+- Generators
 - Proxies
-- Symbols
-- Module Loaders
 - + probably some more
 
 ### Where / How can I use its features?
@@ -49,19 +51,15 @@ the the second react lesson.
 Steps:
 1. Clone down react-omdb if you don't already have it
 2. `cd` into it
-3. Switch to the solution-single-file branch
-  - `$ git checkout solution-single-file`
-  <!-- TODO: combine steps 3 & 4 -->
-  <!-- Have the es6 branch ready to go, possibly with a readme of these steps -->
-4. From the solution-single-file branch create a new branch
-  - `$ git checkout -b es6-refactor`
-5. Make sure current dependencies are installed
+3. Switch to the es6-starter branch
+  - `$ git checkout es6-starter`
+4. Make sure current dependencies are installed
   - `$ npm install`
-6. Install additional babel dev dependencies
+5. Install additional babel dev dependencies
   - `$ npm install --save-dev babel-preset-es2015`
-7. Open the repo in atom
+6. Open the repo in atom
   - `$ atom .`
-8. Add the new babel preset to your `.babelrc` file
+7. Add the new babel preset to your `.babelrc` file
   ```json
   {
     "presets": [
@@ -202,6 +200,38 @@ Caveats
 
 ### You do:
 
+# Concise Object Methods / Object literals
+
+'Concise Object Methods' are a new syntax for writing functions with objects that allow you to skip writing ': function'
+
+```js
+// ES5
+var doStuff = {
+  sayHello: function() {
+    console.log("Hello");
+  },
+  eatPizza: function(pizza) {
+    pizza = 0;
+    return "thanks!"
+  }
+}
+```
+
+```js
+// ES2015
+let doStuff = {
+  sayHello() {
+    console.log("Hello");
+  },
+  eatPizza(pizza) {
+    pizza = 0;
+    return "thanks!"
+  }
+}
+```
+
+### You do:
+
 # Arrows
 
 According to [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) the two biggest motivations for arrows were **shorter functions** and **lexical `this`**. Arrows can make your code cleaner and more intuitive.
@@ -319,87 +349,42 @@ This trivial example shows a non trivial use case - arrows can simplify callback
 
 ### You do:
 
-# Concise Object Methods / Object literals
+# Destructing
 
-'Concise Object Methods' are a new syntax for writing functions with objects that allow you to skip writing ': function'
-
-```js
-// ES5
-var doStuff = {
-  sayHello: function() {
-    console.log("Hello");
-  },
-  eatPizza: function(pizza) {
-    pizza = 0;
-    return "thanks!"
-  }
-}
-```
+Destructing is a new syntax that makes it easier to extract data from objects and arrays. Destructing matches patterns to assign values to variables.
 
 ```js
 // ES2015
-let doStuff = {
-  sayHello() {
-    console.log("Hello");
-  },
-  eatPizza(pizza) {
-    pizza = 0;
-    return "thanks!"
-  }
-}
+let [a, b] = ["cats", "dogs"]
+
+console.log(a); // "cats"
+console.log(b); // "dogs"
+
+let x = {y: "pizza", z: 100}
+let {y, z} = x
+
+console.log(y); // "pizza"
+console.log(z); // 100
 ```
 
-### You do:
-
-# Classes
-
-
-```js
-// ES5
-function Pizza(name, temperature) {
-  this.name = name;
-  this.temperature = temperature
-}
-
-Pizza.prototype.heatUp = function () {
-  return this.temperature + 20;
-};
-```
-
----
-
-Classes provided syntactic sugar over JavaScript's existing prototype-based inheritance. A class body can only methods and not data properties. Putting data in prototypes is generally an anti-pattern, so this enforces a best practice. Data is instead attached to classes using the `constructor` method. Instance methods (defined with concise object syntax) are automatically connected through prototypical inheritance.
+For destructing objects the assigned name needs to match the keys of the object
 
 ```js
 // ES2015
-class Pizza {
-  constructor(name, temperature) {
-    this.name = name;
-    this.temperature = temperature;
-  }
-  static sayCool() {
-    console.log("cool!");
-  }
-  heatUp() {
-    return this.temperature + 20;
-  }
-}
+let x = {y: "pizza", z: 100}
+let {foo, bar} = x // not useful: neither foo or bar are in 'x'
+
+console.log(foo); // undefined
+console.log(bar); // undefined
 ```
 
-The `static` keyword defines a static method for a class. Static methods are called without instantiating their class and are also not callable when the class is instantiated. Static methods are often used to create utility functions for an application.
-[MDN static](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/static)
+### Learn more
+- nested object and array destructing
+- combine with default parameters
+- combine with default spread
+- combine with iteration
 
-### Extends
-The extends keyword is used in a class declaration (or class expression) to create a class with a child of another class.
-[MDN extends](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/extends)
-- super
-The super keyword is used to call functions on an objects parent.
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super
-
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
-http://www.2ality.com/2015/02/es6-classes-final.html
-
-### You do:
+[MDN Destructing](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
 
 # Modules / Loaders
 
@@ -449,23 +434,217 @@ sayHello()
 // > "Hello"
 ```
 
-Learn more:
+#### Learn more:
 - importing everything from a module
 - default exports and imports
 - aliasing imports
 
 ### You do:
 
+# Classes
 
+
+```js
+// ES5
+function Pizza(name, temperature) {
+  this.name = name;
+  this.temperature = temperature
+}
+
+Pizza.prototype.heatUp = function () {
+  return this.temperature + 20;
+};
+```
+
+---
+
+Classes provided syntactic sugar over JavaScript's existing prototype-based inheritance. A class body can only methods and not data properties. Putting data in prototypes is generally an anti-pattern, so this enforces a best practice. Data is instead attached to classes using the `constructor` method. Instance methods (defined with concise object syntax) are automatically connected through prototypical inheritance.
+
+```js
+// ES2015
+class Pizza {
+  constructor(name, temperature) {
+    this.name = name;
+    this.temperature = temperature;
+  }
+  static sayCool() {
+    console.log("cool!");
+  }
+  heatUp() {
+    return this.temperature + 20;
+  }
+}
+```
+
+The `static` keyword defines a static method for a class. Static methods are called without instantiating their class and are also not callable when the class is instantiated. Static methods are often used to create utility functions for an application.
+[MDN static](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/static)
+
+```js
+// ES2015
+Pizza.sayCool();
+// > "cool!"
+let za = new Pizza("cheese", "hot")
+
+za.sayCool();
+// TypeError: za.sayCool is not a function
+```
+
+### Extends
+The `extends` keyword is used in a class declaration (or class expression) to create a class with a child of another class. [MDN extends](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/extends)
+
+The `super` keyword is used to call functions on an objects parent. [MDN extends](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super)
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
+http://www.2ality.com/2015/02/es6-classes-final.html
+
+```js
+// ES2015
+class JumboSlice extends Pizza {
+  constructor(name, temperature) {
+    super(cheese, lavaHot); // calls the constructor of the class being extended
+    this.size = "jumbo";
+  }
+  cheesyRegret() {
+    return "penitent stomach"
+  }
+}
+```
+
+### You do:
+
+#### Learn more:
+- class expressions vs class declarations
+- getters and setters
+- mixins
+- class hoisting
 
 # Bonus
-- new static methods - String, Array, Math
-- Promises
-- Iterators
-- Generators
-- Spread / Rest parameters
-- Map / Set / WeakMap / WeakSet
-- Proxies
-- Symbols
-- Module Loaders
-- + probably some more
+### new static methods - Math, Number, String, Array, Object
+
+[Math, Number, String, Array, Object](https://github.com/lukehoban/es6features#math--number--string--array--object-apis)
+
+### Symbols
+
+A symbol is a unique and immutable data type and may be used as an identifier for object properties. The Symbol object is an implicit object wrapper for the symbol primitive data type.
+
+[MDN Symbol](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol)
+
+### Default Parameters
+
+Default function parameters allow formal parameters to be initialized with default values if no value or undefined is passed.
+
+```js
+// ES2015
+function multiply(a, b = 2) {
+  return a*b;
+}
+
+multiply(5); // 10
+```
+
+[MDN default parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters)
+
+### Spread
+
+```js
+var parts = ['shoulders', 'knees'];
+var lyrics = ['head', ...parts, 'and', 'toes']; // ["head", "shoulders", "knees", "and", "toes"]
+```
+[MDN Spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator)
+
+### Rest parameters
+
+The rest parameter syntax allows us to represent an indefinite number of arguments as an array. If the last named argument of a function is prefixed with `...`, it becomes an array with the remaining arguments passed to the function.
+
+```js
+// ES2015
+function(a, b, ...theArgs) {
+  // ...
+}
+```
+
+[MDN Rest Parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters)
+
+### Promises
+
+Offical support for promises with an api that is similar to ones that already exist in many libraries.
+
+```js
+// ES2015
+function timeout(duration = 0) {
+    return new Promise((resolve, reject) => {
+        setTimeout(resolve, duration);
+    })
+}
+
+var p = timeout(1000).then(() => {
+    return timeout(2000);
+}).then(() => {
+    throw new Error("hmm");
+}).catch(err => {
+    return Promise.all([timeout(100), timeout(200)]);
+})
+```
+
+[Promise example](https://github.com/lukehoban/es6features#promises)
+
+### Iterators
+
+```js
+// ES2015
+let iterable = [10, 20, 30];
+
+for (let value of iterable) {
+  console.log(value);
+}
+// 10
+// 20
+// 30
+```
+
+[MDN iterators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of)
+
+### Map / Set / WeakMap / WeakSet
+
+Data structures that make it easier to complicated things.
+
+```js
+// ES2015
+
+// Sets
+var s = new Set();
+s.add("hello").add("goodbye").add("hello");
+s.size === 2;
+s.has("hello") === true;
+
+// Maps
+var m = new Map();
+m.set("hello", 42);
+m.set(s, 34);
+m.get(s) == 34;
+
+// Weak Maps
+var wm = new WeakMap();
+wm.set(s, { extra: 42 });
+wm.size === undefined
+
+// Weak Sets
+var ws = new WeakSet();
+ws.add({ data: 42 });
+```
+
+[Map / Set / WeakMap / WeakSet Example](https://github.com/lukehoban/es6features#map--set--weakmap--weakset)
+
+### Generators
+
+Make it easier to use `function*` and `yield`
+
+[MDN iteration protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols)
+
+### Proxies
+
+The Proxy object is used to define custom behavior for fundamental operations (e.g. property lookup, assignment, enumeration, function invocation, etc).
+
+[MDN Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy)
+
+### + probably some more
