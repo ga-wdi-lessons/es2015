@@ -696,5 +696,5 @@ The Proxy object is used to define custom behavior for fundamental operations (e
 
 ### + probably some more
 
-[ES2015 features and compatibility](http://kangax.github.io/compat-table/es6/)
-[MDN list of Firefox compatibile features with links to docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/New_in_JavaScript/ECMAScript_6_support_in_Mozilla)
+- [ES2015 features and compatibility](http://kangax.github.io/compat-table/es6/)
+- [MDN list of Firefox compatibile features with links to docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/New_in_JavaScript/ECMAScript_6_support_in_Mozilla)
